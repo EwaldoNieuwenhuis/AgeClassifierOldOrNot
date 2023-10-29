@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Old or not</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+   
+</head>
+<body>
+    <header class="bg-gray-900 p-8 flex justify-between">
+        <h1 class="mt-2 text-white bold pl-5 text-3xl ">Age classifier: Old or not</h1>
+        <img width="140" class="mb-3" src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fvignette.wikia.nocookie.net%2Flogopedia%2Fimages%2Fb%2Fb6%2FUniversal_Pictures_Logo_(2013%253B_HD).png%2Frevision%2Flatest%2Fscale-to-width-down%2F2000%3Fcb%3D20160914195812&f=1&nofb=1&ipt=b0f0229d5adec543756c447c29a89edccd88d7fd4f951b04cdd1921d04f147f8&ipo=images" alt="" >
+
+    </header>
+    <div class="min-h-screen bg-sky-950 flex justify-center items-center">
+        <div class="flex flex-col items-center">
+            {% if prediction %}
+          <div class="w- p-6 bg-white rounded-xl shadow-xl hover:shadow-2xl hover:scale-105 transition-all transform duration-500">
+            <img class="w-64 rounded-xl rounded-t-md" src="{{url_for('static', filename='images/' + filename)}}" alt="" />
+            <div class="mt-4">
+              <h1 class="text-2xl font-bold text-gray-700">Predicted age: </h1>
+              <h1 class="text-xl text-gray-700">
+                   {{prediction}} 
+              </h1>
+                {% if old == 1 %}
+                    <h1 class="text-xl font-bold text-red-600">
+                         This person is old
+                    </h1>
+                {% endif %} 
+                {% if old == 0 %}
+                <h1 class="text-xl font-bold text-green-500">
+                     This person is NOT old
+                </h1>
+                {% endif %}
+            </div>
+          </div>
+          {% endif %} 
+
+          <form action='/', method="post" enctype="multipart/form-data" class=" bg-blue-300 flex flex-col items-center bg-blue-500 text-xl text-white font-bold py-3 px-2 mt-12 rounded-xl">
+            <input class="form-control" type="file" name="imagefile" class="block w-full text-xl text-white border border-gray-300 rounded-lg cursor-pointer bg-blue-50 dark:text-blue-400 focus:outline-none dark:bg-blue-700 dark:border-blue-600 dark:placeholder-blue-400" >
+            <input class="hover:bg-blue-700 p-2 mt-2 w-full rounded-xl"type="submit" value="Predict Image" >
+        </form>
+
+          <!-- <form action="/" method="post" enctype="multipart/form-data" class="flex flex-col items-center bg-blue-500 text-xl text-white font-bold py-3 px-2 mt-12 rounded-xl">
+            <input name="imagefile" class="block w-full text-xl text-white border border-gray-300 rounded-lg cursor-pointer bg-blue-50 dark:text-blue-400 focus:outline-none dark:bg-blue-700 dark:border-blue-600 dark:placeholder-blue-400" id="file_input" type="file">
+            <input value="Predict Image" type="submit" class="hover:bg-blue-700 p-2 mt-2 w-full rounded-xl
+            ">
+           </form> -->
+          
+        </div>
+      </div>
+      
+</body>
+</html>
